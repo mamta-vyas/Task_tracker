@@ -1,8 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+
 
 const ProjectCard = ({ project, onSelect, onDelete, isSelected }) => {
-  const dispatch = useDispatch();
+ 
 
   const handleClick = () => {
     if (onSelect) onSelect(project);

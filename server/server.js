@@ -20,7 +20,11 @@ if (!MONGO_URI) {
 }
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // during local dev
+  // origin: '*'  // OR allow all origins (less secure, only for testing)
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
