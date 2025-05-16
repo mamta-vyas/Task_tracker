@@ -21,7 +21,7 @@ if (!MONGO_URI) {
 
 // Middleware
 app.use(cors({
-  origin: 'https://tasktrackerappp.netlify.app/', // during local dev
+  origin: 'https://tasktrackerappp.netlify.app', // during local dev
   // origin: '*'  // OR allow all origins (less secure, only for testing)
 }));
 
