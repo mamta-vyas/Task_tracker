@@ -1,130 +1,167 @@
-🗂️ Task Tracker Application
-A full-stack task tracker application with user authentication, project & task management, and task update/delete features.
+# ✅ Task Tracker Application
 
-Built with:
+A full-stack Task Tracker web application with secure user authentication, project and task management — built using the MERN stack. Designed to help users manage projects, assign tasks, and track progress in real time.
 
-Frontend: React.js + Tailwind CSS
+🔗 **Live Demo:** [https://tasktrackerappp.netlify.app/](https://tasktrackerappp.netlify.app/)  
+📂 **GitHub Repo:** [https://github.com/mamta-vyas/Task_tracker](https://github.com/mamta-vyas/Task_tracker)
 
-Backend: Express.js + MongoDB
+---
 
-Authentication: JWT (JSON Web Token)
+## 🚀 Tech Stack
 
-State management: React Context API (or Redux if applicable)
+### **Frontend:**
+- React.js
+- Tailwind CSS
+- React Context API (or Redux)
 
-Task Features: Create, update, delete tasks, mark tasks completed, edit tasks inline
+### **Backend:**
+- Node.js
+- Express.js
+- MongoDB (with Mongoose)
+- JWT Authentication
 
-Project Features: Manage projects with associated tasks
+---
 
+## 📌 Features
 
-## 📁 Folder Structure
+### 🔐 Authentication
+- Secure user signup and login
+- JWT-based session handling
+- Protected API routes
+
+### 📁 Project Management
+- Create and manage multiple projects
+- Each project contains its own task list
+
+### ✅ Task Management
+- Add, update, delete tasks
+- Inline editing of tasks
+- Mark tasks as completed
+- View creation & completion timestamps
+
+### 💡 UI/UX
+- Responsive design with Tailwind CSS
+- Reusable components
+- Real-time UI updates
+
+---
+
+## 📂 Folder Structure
 
 task-tracker/
-├── client/         # React frontend app
-│   ├── src/
-│   │   ├── components/   # UI components like TaskCard, TaskList, Navbar, CreateTaskForm, etc.
-│   │   ├── context/      # Auth context provider
-│   │   ├── pages/        # Main pages like Dashboard, LoginPage, SignupPage
-│   │   ├── services/     # API service layer for auth and task management
-│   │   ├── app/          # Store (if using Redux)
-│   │   ├── utils/        # Utility functions like token helpers
-│   │   └── index.js      # React entry point
-│   ├── package.json
-│   └── tailwind.config.js
-├── server/         # Express backend API
-│   ├── controllers/     # Controllers for auth, tasks, projects
-│   ├── middleware/      # Middleware like auth verification
-│   ├── models/          # Mongoose models for User, Project, Task
-│   ├── routes/          # API routes for auth, tasks, projects
-│   ├── config/          # DB config
-│   ├── package.json
-│   └── server.js        # Entry point for backend server
-├── README.md         # Project overview and setup
+├── client/ # React frontend
+│ ├── src/
+│ │ ├── components/ # UI components
+│ │ ├── context/ # Auth provider or Redux store
+│ │ ├── pages/ # Pages like Dashboard, Login, Signup
+│ │ ├── services/ # API calls
+│ │ ├── utils/ # Helper functions
+│ │ └── index.js # App entry point
+│ ├── package.json
+│ └── tailwind.config.js
+├── server/ # Express backend
+│ ├── config/ # DB configuration
+│ ├── controllers/ # Route handlers
+│ ├── middleware/ # JWT verification
+│ ├── models/ # Mongoose models (User, Project, Task)
+│ ├── routes/ # Express routes
+│ ├── package.json
+│ └── server.js # App entry point
+├── README.md
+
+yaml
+Copy
+Edit
 
 
-🚀 Features Implemented
-User Authentication
-User signup and login with JWT token-based authentication
+---
 
-Protected routes for managing projects and tasks
+## 🛠️ Getting Started Locally
 
-Project Management
-Create, view, and manage multiple projects
+### ✅ Prerequisites
+- Node.js and npm
+- MongoDB installed locally or MongoDB Atlas URI
 
-Each project contains its own set of tasks
+---
 
-Task Management
-Create new tasks with title, description, status, and timestamps
+### 🔧 Backend Setup
 
-Update task status (mark tasks as completed)
-
-Edit existing tasks inline with an edit form UI
-
-Delete tasks from the list
-
-Display task creation and completion dates
-
-UI & UX
-Responsive and clean interface built with React and styled with Tailwind CSS
-
-Reusable components: TaskCard, TaskList, CreateTaskForm, ProjectCard, Navbar
-
-Real-time UI updates on task operations (create, update, delete)
-
-Edit form toggle for tasks to update details seamlessly
-
-User-friendly date formatting and status highlights
-
-📦 Getting Started
-Prerequisites
-Node.js and npm installed
-
-MongoDB running locally or a connection string for a hosted MongoDB cluster
-
-Setup Instructions
-Clone the repo
-
-git clone https://github.com/mamta-vyas/Task_tracker.git
-cd task-tracker
-
-Setup Backend
-
+```bash
 cd server
 npm install
-# Add your MongoDB connection URI in `server/config/db.js`
-npm run dev    # Runs the server with nodemon on port 5000 (default)
+# Add your MongoDB URI to server/config/db.js
+npm run dev
 
-Setup Frontend
+Server will run at: http://localhost:5000
 
-cd ../client
+🎨 Frontend Setup
+
+cd client
 npm install
-npm start    # Runs React dev server on port 3000
+npm start
 
-📂 API Endpoints Overview
-Auth: /api/auth/signup, /api/auth/login
+Client will run at: http://localhost:3000
 
-Projects: /api/projects (CRUD operations)
+🔐 API Endpoints Overview
+All routes are protected and require a valid JWT token in the Authorization header.
 
-Tasks: /api/tasks (CRUD operations, including status updates)
+📦 Auth Routes
+Method	Endpoint	Description
+POST	/api/auth/signup	Register a new user
+POST	/api/auth/login	Login and get JWT token
 
-🛠️ How to Use
+📁 Project Routes
+Method	Endpoint	Description
+GET	/api/projects	Get all user projects
+POST	/api/projects	Create a new project
+PUT	/api/projects/:id	Update a project by ID
+DELETE	/api/projects/:id	Delete a project by ID
+
+✅ Task Routes (Scoped to Projects)
+Method	Endpoint	Description
+GET	/api/projects/:projectId/tasks	Get all tasks for a project
+POST	/api/projects/:projectId/tasks	Add a new task to a project
+PUT	/api/projects/:projectId/tasks/:taskId	Update a specific task
+DELETE	/api/projects/:projectId/tasks/:taskId	Delete a specific task
+
+🛡️ Axios Configuration
+You're using Axios with a base URL and JWT token interceptor:
+
+const API = axios.create({
+  baseURL: "https://task-tracker-5nfd.onrender.com/api",
+});
+
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem("token");
+  if (token) req.headers.Authorization = `Bearer ${token}`;
+  return req;
+});
+
+🧪 How to Use the App
 Sign up or log in to your account
 
-Create new projects or select existing projects
+Create a project from the dashboard
 
-Add tasks to projects, update their details or status
+Add tasks under any project
 
 Edit or delete tasks as needed
 
-Monitor task creation and completion dates
+Mark tasks as completed
 
-📝 Notes
-This project uses JWT for session management and secures API endpoints
+View task creation and completion times
 
-Task editing happens inline via a toggleable form
+💻 Deployment
+The app is fully deployed and accessible via:
 
-All data persists in MongoDB
+🌐 Frontend (Netlify): https://tasktrackerappp.netlify.app/
 
-The UI is responsive and styled with Tailwind CSS
+You can self-host the backend using Render, Railway, or any Node hosting platform. Ensure it's connected to a MongoDB (Atlas) instance.
 
-🤝 Contributions
-Feel free to fork the repo and submit pull requests if you want to add features or improve the app!
+🙌 Contributions
+Feel free to fork this repository and submit pull requests.
+New features, suggestions, and bug fixes are welcome!
+
+👩‍💻 Author
+Mamta Vyas
+🔗 LinkedIn - https://www.linkedin.com/in/mamtavyas/
+📫 Contact via GitHub Issues or Pull Requests
